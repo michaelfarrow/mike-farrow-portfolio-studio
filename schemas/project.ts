@@ -98,6 +98,16 @@ export const project = defineType({
       ],
     }),
     defineField({
+      title: 'Content',
+      name: 'contentShort',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+        },
+      ],
+    }),
+    defineField({
       name: 'client',
       type: 'reference',
       fieldset: 'links',
