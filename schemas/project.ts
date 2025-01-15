@@ -1,5 +1,9 @@
-import { defineField, defineType } from 'sanity';
+import { defineType, defineField, defineArrayMember } from 'sanity';
 import { nameFields } from './common/fields/title';
+import {
+  externalLinkAnnotation,
+  internalLinkAnnotation,
+} from './common/blocks/annotations/link';
 
 export const project = defineType({
   name: 'project',
@@ -32,7 +36,9 @@ export const project = defineType({
       name: 'categories',
       type: 'array',
       fieldset: 'details',
-      of: [{ type: 'reference', to: [{ type: 'category' }] }],
+      of: [
+        defineArrayMember({ type: 'reference', to: [{ type: 'category' }] }),
+      ],
     }),
     defineField({
       name: 'thumbnail',
@@ -53,30 +59,13 @@ export const project = defineType({
       name: 'content',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'block',
           marks: {
-            annotations: [
-              {
-                name: 'internalLink',
-                type: 'object',
-                title: 'Internal link',
-                fields: [
-                  {
-                    name: 'reference',
-                    type: 'reference',
-                    title: 'Reference',
-                    to: [
-                      { type: 'project' },
-                      // other types you may want to link to
-                    ],
-                  },
-                ],
-              },
-            ],
+            annotations: [externalLinkAnnotation, internalLinkAnnotation],
           },
-        },
-        {
+        }),
+        defineArrayMember({
           name: 'internalLinkBlock',
           type: 'object',
           title: 'Internal link block',
@@ -94,7 +83,7 @@ export const project = defineType({
               media: 'reference.thumbnail',
             },
           },
-        },
+        }),
       ],
     }),
     defineField({
@@ -102,9 +91,12 @@ export const project = defineType({
       name: 'contentShort',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'block',
-        },
+          marks: {
+            annotations: [internalLinkAnnotation],
+          },
+        }),
       ],
     }),
     defineField({
@@ -118,7 +110,7 @@ export const project = defineType({
       type: 'array',
       fieldset: 'links',
       of: [
-        {
+        defineArrayMember({
           type: 'object',
           fields: [
             defineField({
@@ -129,15 +121,15 @@ export const project = defineType({
               name: 'contacts',
               type: 'array',
               of: [
-                {
+                defineArrayMember({
                   type: 'reference',
                   to: [{ type: 'contact' }],
-                },
+                }),
               ],
               validation: (rule) => rule.required(),
             }),
           ],
-        },
+        }),
       ],
     }),
     defineField({
