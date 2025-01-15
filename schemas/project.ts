@@ -35,10 +35,67 @@ export const project = defineType({
       of: [{ type: 'reference', to: [{ type: 'category' }] }],
     }),
     defineField({
+      name: 'thumbnail',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'description',
       type: 'text',
       fieldset: 'content',
       rows: 5,
+    }),
+    defineField({
+      title: 'Content',
+      name: 'content',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          marks: {
+            annotations: [
+              {
+                name: 'internalLink',
+                type: 'object',
+                title: 'Internal link',
+                fields: [
+                  {
+                    name: 'reference',
+                    type: 'reference',
+                    title: 'Reference',
+                    to: [
+                      { type: 'project' },
+                      // other types you may want to link to
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+        {
+          name: 'internalLinkBlock',
+          type: 'object',
+          title: 'Internal link block',
+          fields: [
+            {
+              name: 'reference',
+              type: 'reference',
+              title: 'Reference',
+              to: [{ type: 'project' }],
+            },
+          ],
+          preview: {
+            select: {
+              title: 'reference.name',
+              media: 'reference.thumbnail',
+            },
+          },
+        },
+      ],
     }),
     defineField({
       name: 'client',
