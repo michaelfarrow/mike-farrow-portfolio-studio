@@ -4,14 +4,14 @@
   "version": "1.0.0",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "sanity dev",
+    "dev": "concurrently --names 'studio,watch' -c 'bgGreen.bold,bgMagenta.bold' \"sanity dev\" \"npm run watch\"",
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
     "generate:schema": "sanity schema extract",
     "generate:types": "sanity typegen generate",
-    "generate:all": "npm run generate:schema && npm run generate:types"
+    "watch": "chokidar ./schemas --silent --initial -c 'npm run generate:schema'"
   },
   "keywords": [
     "sanity"
@@ -27,6 +27,8 @@
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.1",
     "@types/react": "^18.0.25",
+    "chokidar-cli": "^3.0.0",
+    "concurrently": "^9.1.2",
     "eslint": "^9.9.0",
     "prettier": "^3.0.2",
     "typescript": "^5.1.6",
