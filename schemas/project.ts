@@ -84,6 +84,68 @@ export const project = defineType({
             },
           },
         }),
+        defineArrayMember({
+          name: 'responsiveImage',
+          type: 'object',
+          title: 'Responsive Image',
+          fields: [
+            defineField({
+              name: 'main',
+              type: 'image',
+              description:
+                'Used across all breakpoints, or highest breakpoints if any other images are set',
+            }),
+            defineField({
+              name: 'additional',
+              type: 'array',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  fields: [
+                    defineField({
+                      name: 'maxWidth',
+                      type: 'string',
+                      options: {
+                        list: ['mobile', 'tablet'],
+                      },
+                      validation: (rule) => rule.required(),
+                    }),
+                    defineField({
+                      name: 'image',
+                      type: 'image',
+                      validation: (rule) => rule.required(),
+                    }),
+                  ],
+                  preview: {
+                    select: {
+                      maxWidth: 'maxWidth',
+                      media: 'image.asset',
+                    },
+                    prepare({ media, maxWidth }) {
+                      return {
+                        media,
+                        title:
+                          (maxWidth && String(maxWidth).toUpperCase()) ||
+                          '[Unknown]',
+                      };
+                    },
+                  },
+                }),
+              ],
+            }),
+          ],
+          preview: {
+            select: {
+              media: 'main.asset',
+            },
+            prepare({ media }) {
+              return {
+                media,
+                title: 'Main',
+              };
+            },
+          },
+        }),
       ],
     }),
     defineField({
