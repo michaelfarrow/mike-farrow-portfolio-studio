@@ -92,6 +92,9 @@ export const project = defineType({
             defineField({
               name: 'main',
               type: 'image',
+              options: {
+                hotspot: true,
+              },
               description:
                 'Used across all breakpoints, or highest breakpoints if any other images are set',
             }),
@@ -113,6 +116,9 @@ export const project = defineType({
                     defineField({
                       name: 'image',
                       type: 'image',
+                      options: {
+                        hotspot: true,
+                      },
                       validation: (rule) => rule.required(),
                     }),
                   ],
