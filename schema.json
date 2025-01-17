@@ -477,6 +477,13 @@
               },
               "optional": true
             },
+            "alt": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
             "_type": {
               "type": "objectAttribute",
               "value": {
@@ -839,6 +846,13 @@
                           },
                           "optional": true
                         },
+                        "alt": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "string"
+                          },
+                          "optional": true
+                        },
                         "_type": {
                           "type": "objectAttribute",
                           "value": {
@@ -850,30 +864,13 @@
                     },
                     "optional": true
                   },
-                  "additional": {
+                  "alternative": {
                     "type": "objectAttribute",
                     "value": {
                       "type": "array",
                       "of": {
                         "type": "object",
                         "attributes": {
-                          "breakpoint": {
-                            "type": "objectAttribute",
-                            "value": {
-                              "type": "union",
-                              "of": [
-                                {
-                                  "type": "string",
-                                  "value": "mobile"
-                                },
-                                {
-                                  "type": "string",
-                                  "value": "tablet"
-                                }
-                              ]
-                            },
-                            "optional": true
-                          },
                           "image": {
                             "type": "objectAttribute",
                             "value": {
@@ -933,6 +930,23 @@
                                   }
                                 }
                               }
+                            },
+                            "optional": true
+                          },
+                          "breakpoint": {
+                            "type": "objectAttribute",
+                            "value": {
+                              "type": "union",
+                              "of": [
+                                {
+                                  "type": "string",
+                                  "value": "mobile"
+                                },
+                                {
+                                  "type": "string",
+                                  "value": "tablet"
+                                }
+                              ]
                             },
                             "optional": true
                           }

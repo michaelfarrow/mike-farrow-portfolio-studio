@@ -1,27 +1,38 @@
 import { defineField } from 'sanity';
+import { SetOptional } from 'type-fest';
 
-interface Options {
-  name?: string;
+import { FieldOptions } from './field';
+
+interface TitleFieldOptions extends SetOptional<FieldOptions, 'name'> {
   slug?: boolean;
-  fieldset?: string;
 }
 
-export function titleFields(options: Options = {}) {
-  const { name, slug, fieldset } = options;
+export function titleFields({
+  slug,
+  name,
+  fieldset,
+  group,
+  ...rest
+}: TitleFieldOptions = {}) {
+  const common = {
+    fieldset,
+    group,
+  };
 
   return [
     defineField({
-      name: name || 'title',
+      ...rest,
+      ...common,
       type: 'string',
-      fieldset,
+      name: name || 'title',
       validation: (rule) => rule.required(),
     }),
     ...(slug !== false
       ? [
           defineField({
-            name: 'slug',
+            ...common,
             type: 'slug',
-            fieldset,
+            name: 'slug',
             options: { source: 'name' },
             validation: (rule) => rule.required(),
             hidden: ({ document }) => !document?.name,
@@ -31,7 +42,7 @@ export function titleFields(options: Options = {}) {
   ];
 }
 
-export const nameFields = (options?: Omit<Options, 'name'>) =>
+export const nameFields = (options?: Omit<TitleFieldOptions, 'name'>) =>
   titleFields({
     ...options,
     name: 'name',

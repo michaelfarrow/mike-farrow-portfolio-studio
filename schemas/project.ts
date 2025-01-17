@@ -1,5 +1,7 @@
 import { defineType, defineField, defineArrayMember } from 'sanity';
+
 import { nameFields } from './common/fields/title';
+import { imageField, responsiveImageField } from './common/fields/image';
 import {
   externalLinkAnnotation,
   internalLinkAnnotation,
@@ -40,14 +42,7 @@ export const project = defineType({
         defineArrayMember({ type: 'reference', to: [{ type: 'category' }] }),
       ],
     }),
-    defineField({
-      name: 'thumbnail',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      validation: (rule) => rule.required(),
-    }),
+    imageField({ name: 'thumbnail', required: true }),
     defineField({
       name: 'description',
       type: 'text',
@@ -84,73 +79,9 @@ export const project = defineType({
             },
           },
         }),
-        defineArrayMember({
+        responsiveImageField({
           name: 'responsiveImage',
-          type: 'object',
           title: 'Responsive Image',
-          fields: [
-            defineField({
-              name: 'main',
-              type: 'image',
-              options: {
-                hotspot: true,
-              },
-              description:
-                'Used across all breakpoints, or highest breakpoints if any other images are set',
-            }),
-            defineField({
-              name: 'additional',
-              type: 'array',
-              of: [
-                defineArrayMember({
-                  type: 'object',
-                  fields: [
-                    defineField({
-                      name: 'breakpoint',
-                      type: 'string',
-                      options: {
-                        list: ['mobile', 'tablet'],
-                      },
-                      validation: (rule) => rule.required(),
-                    }),
-                    defineField({
-                      name: 'image',
-                      type: 'image',
-                      options: {
-                        hotspot: true,
-                      },
-                      validation: (rule) => rule.required(),
-                    }),
-                  ],
-                  preview: {
-                    select: {
-                      breakpoint: 'breakpoint',
-                      media: 'image.asset',
-                    },
-                    prepare({ media, breakpoint }) {
-                      return {
-                        media,
-                        title:
-                          (breakpoint && String(breakpoint).toUpperCase()) ||
-                          '[Unknown]',
-                      };
-                    },
-                  },
-                }),
-              ],
-            }),
-          ],
-          preview: {
-            select: {
-              media: 'main.asset',
-            },
-            prepare({ media }) {
-              return {
-                media,
-                title: 'Main',
-              };
-            },
-          },
         }),
       ],
     }),
