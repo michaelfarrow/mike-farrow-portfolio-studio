@@ -106,7 +106,7 @@ export const project = defineType({
                   type: 'object',
                   fields: [
                     defineField({
-                      name: 'maxWidth',
+                      name: 'breakpoint',
                       type: 'string',
                       options: {
                         list: ['mobile', 'tablet'],
@@ -124,14 +124,14 @@ export const project = defineType({
                   ],
                   preview: {
                     select: {
-                      maxWidth: 'maxWidth',
+                      breakpoint: 'breakpoint',
                       media: 'image.asset',
                     },
-                    prepare({ media, maxWidth }) {
+                    prepare({ media, breakpoint }) {
                       return {
                         media,
                         title:
-                          (maxWidth && String(maxWidth).toUpperCase()) ||
+                          (breakpoint && String(breakpoint).toUpperCase()) ||
                           '[Unknown]',
                       };
                     },

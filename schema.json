@@ -857,7 +857,7 @@
                       "of": {
                         "type": "object",
                         "attributes": {
-                          "maxWidth": {
+                          "breakpoint": {
                             "type": "objectAttribute",
                             "value": {
                               "type": "union",
