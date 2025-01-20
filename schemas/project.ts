@@ -81,8 +81,44 @@ export const project = defineType({
         }),
         responsiveImageField({
           name: 'responsiveImage',
-          title: 'Responsive Image',
         }),
+        {
+          name: 'image',
+          type: 'image',
+          fields: [
+            {
+              type: 'string',
+              name: 'alt',
+            },
+          ],
+        },
+      ],
+    }),
+    defineField({
+      title: 'Content',
+      name: 'contentAlt',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'richText',
+          fields: [
+            {
+              name: 'content',
+              type: 'array',
+              of: [
+                defineArrayMember({
+                  type: 'block',
+                  marks: {
+                    annotations: [internalLinkAnnotation],
+                  },
+                }),
+              ],
+            },
+          ],
+        }),
+        imageField({ name: 'image' }),
+        responsiveImageField({ name: 'responsiveImage' }),
       ],
     }),
     defineField({

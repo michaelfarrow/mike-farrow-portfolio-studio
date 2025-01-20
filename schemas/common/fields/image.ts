@@ -85,13 +85,7 @@ export function responsiveImageField({ ...rest }: FieldOptions) {
     preview: {
       select: {
         media: 'main.asset',
-      },
-      prepare(selection) {
-        const { media } = selection;
-        return {
-          media,
-          title: (media && 'Desktop') || 'None',
-        };
+        title: 'main.alt',
       },
     },
   });
