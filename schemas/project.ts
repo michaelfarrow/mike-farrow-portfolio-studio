@@ -1,11 +1,8 @@
 import { defineType, defineField, defineArrayMember } from 'sanity';
 
 import { nameFields } from './common/fields/title';
-import { imageField, responsiveImageField } from './common/fields/image';
-import {
-  externalLinkAnnotation,
-  internalLinkAnnotation,
-} from './common/blocks/annotations/link';
+import { imageField } from './common/fields/image';
+import { contentArrayField } from './common/fields/content-array';
 
 export const project = defineType({
   name: 'project',
@@ -49,91 +46,7 @@ export const project = defineType({
       fieldset: 'content',
       rows: 5,
     }),
-    defineField({
-      title: 'Content',
-      name: 'content',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'block',
-          marks: {
-            annotations: [externalLinkAnnotation, internalLinkAnnotation],
-          },
-        }),
-        defineArrayMember({
-          name: 'internalLinkBlock',
-          type: 'object',
-          title: 'Internal link block',
-          fields: [
-            {
-              name: 'reference',
-              type: 'reference',
-              title: 'Reference',
-              to: [{ type: 'project' }],
-            },
-          ],
-          preview: {
-            select: {
-              title: 'reference.name',
-              media: 'reference.thumbnail',
-            },
-          },
-        }),
-        responsiveImageField({
-          name: 'responsiveImage',
-        }),
-        {
-          name: 'image',
-          type: 'image',
-          fields: [
-            {
-              type: 'string',
-              name: 'alt',
-            },
-          ],
-        },
-      ],
-    }),
-    defineField({
-      title: 'Content',
-      name: 'contentAlt',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'richText',
-          fields: [
-            {
-              name: 'content',
-              type: 'array',
-              of: [
-                defineArrayMember({
-                  type: 'block',
-                  marks: {
-                    annotations: [internalLinkAnnotation],
-                  },
-                }),
-              ],
-            },
-          ],
-        }),
-        imageField({ name: 'image' }),
-        responsiveImageField({ name: 'responsiveImage' }),
-      ],
-    }),
-    defineField({
-      title: 'Content',
-      name: 'contentShort',
-      type: 'array',
-      of: [
-        defineArrayMember({
-          type: 'block',
-          marks: {
-            annotations: [internalLinkAnnotation],
-          },
-        }),
-      ],
-    }),
+    contentArrayField({ name: 'content' }),
     defineField({
       name: 'client',
       type: 'reference',

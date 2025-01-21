@@ -1,5 +1,6 @@
 import { defineField, defineArrayMember } from 'sanity';
 import { titleCase } from 'title-case';
+import { ImageIcon, ImagesIcon } from '@sanity/icons';
 
 import { FieldOptions } from './field';
 
@@ -14,6 +15,7 @@ export function imageField(options: ImageFieldOptions) {
   return defineField({
     ...rest,
     type: 'image',
+    icon: ImageIcon,
     options: {
       hotspot: true,
     },
@@ -35,6 +37,7 @@ export function responsiveImageField({ ...rest }: FieldOptions) {
   return defineField({
     ...rest,
     type: 'object',
+    icon: ImagesIcon,
     fields: [
       imageField({
         name: 'main',
