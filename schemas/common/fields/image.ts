@@ -2,7 +2,7 @@ import { defineField, defineArrayMember } from 'sanity';
 import { titleCase } from 'title-case';
 import { ImageIcon, ImagesIcon } from '@sanity/icons';
 
-import { FieldOptions } from './field';
+import { FieldOptions } from '@/schemas/common/fields/field';
 
 interface ImageFieldOptions extends FieldOptions {
   decorative?: boolean;

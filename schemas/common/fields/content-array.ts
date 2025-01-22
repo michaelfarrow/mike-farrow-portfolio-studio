@@ -1,21 +1,28 @@
 import { defineField, defineArrayMember } from 'sanity';
 import { DocumentTextIcon } from '@sanity/icons';
 
-import { FieldOptions } from './field';
-import { imageField, responsiveImageField } from './image';
+import { FieldOptions } from '@/schemas/common/fields/field';
+import { videoField } from '@/schemas/common/fields/video';
+import {
+  imageField,
+  responsiveImageField,
+} from '@/schemas/common/fields/image';
 
 // import {
 //   externalLinkAnnotation,
 //   internalLinkAnnotation,
-// } from './common/blocks/annotations/link';
+// } from '@/schemas/common/blocks/annotations/link';
 
 interface ContentArrayOptions extends FieldOptions {
   images?: boolean;
+  videos?: boolean;
 }
 
-export function contentArrayField(options: ContentArrayOptions) {
-  const { images, ...rest } = options;
-
+export function contentArrayField({
+  images,
+  videos,
+  ...rest
+}: ContentArrayOptions) {
   return defineField({
     ...rest,
     type: 'array',
@@ -41,6 +48,9 @@ export function contentArrayField(options: ContentArrayOptions) {
             imageField({ name: 'image', caption: true }),
             responsiveImageField({ name: 'responsiveImage', caption: true }),
           ]
+        : []),
+      ...(videos !== false
+        ? [videoField({ name: 'video', caption: true })]
         : []),
     ],
   });

@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { nameFields } from './common/fields/title';
+import { nameFields } from '@/schemas/common/fields/title';
 
 export const contact = defineType({
   name: 'contact',

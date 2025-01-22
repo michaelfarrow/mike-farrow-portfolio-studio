@@ -1,8 +1,8 @@
-import { common } from './common';
+import { common } from '@/schemas/common';
 
-import { category } from './category';
-import { contact } from './contact';
-import { project } from './project';
-import { link } from './link';
+import { category } from '@/schemas/category';
+import { contact } from '@/schemas/contact';
+import { project } from '@/schemas/project';
+import { link } from '@/schemas/link';
 
 export const schemas = [common, category, contact, project, link];

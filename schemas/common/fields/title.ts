@@ -1,7 +1,7 @@
 import { defineField } from 'sanity';
 import { SetOptional } from 'type-fest';
 
-import { FieldOptions } from './field';
+import { FieldOptions } from '@/schemas/common/fields/field';
 
 interface TitleFieldOptions extends SetOptional<FieldOptions, 'name'> {
   slug?: boolean;
