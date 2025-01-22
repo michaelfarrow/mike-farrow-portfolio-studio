@@ -6,7 +6,9 @@ export const common = defineType({
   type: 'object',
   fields: [
     imageField({ name: 'image' }),
+    imageField({ name: 'captionedImage', caption: true }),
     imageField({ name: 'decorativeImage', decorative: true }),
     responsiveImageField({ name: 'responsiveImage' }),
+    responsiveImageField({ name: 'responsiveCaptionedImage', caption: true }),
   ],
 });
