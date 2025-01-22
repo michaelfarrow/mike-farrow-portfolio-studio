@@ -7,10 +7,11 @@ import { FieldOptions } from './field';
 interface ImageFieldOptions extends FieldOptions {
   decorative?: boolean;
   required?: boolean;
+  caption?: boolean;
 }
 
 export function imageField(options: ImageFieldOptions) {
-  const { decorative, required, ...rest } = options;
+  const { decorative, required, caption, ...rest } = options;
 
   return defineField({
     ...rest,
@@ -29,12 +30,28 @@ export function imageField(options: ImageFieldOptions) {
           type: 'string',
           validation: (rule) => rule.required(),
         }),
+        ...(caption
+          ? [
+              defineField({
+                name: 'caption',
+                type: 'text',
+                rows: 4,
+              }),
+            ]
+          : []),
       ]) ||
       [],
   });
 }
 
-export function responsiveImageField({ ...rest }: FieldOptions) {
+interface ResponsiveImageFieldOptions extends FieldOptions {
+  caption?: boolean;
+}
+
+export function responsiveImageField({
+  caption,
+  ...rest
+}: ResponsiveImageFieldOptions) {
   return defineField({
     ...rest,
     type: 'object',
@@ -45,6 +62,7 @@ export function responsiveImageField({ ...rest }: FieldOptions) {
         title: 'Main Image',
         description:
           'Used across all breakpoints, or highest breakpoints if any alternative images are set',
+        caption,
       }),
       defineField({
         name: 'alternative',

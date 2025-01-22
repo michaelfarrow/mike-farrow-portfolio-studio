@@ -38,8 +38,8 @@ export function contentArrayField(options: ContentArrayOptions) {
       }),
       ...(images !== false
         ? [
-            imageField({ name: 'image' }),
-            responsiveImageField({ name: 'responsiveImage' }),
+            imageField({ name: 'image', caption: true }),
+            responsiveImageField({ name: 'responsiveImage', caption: true }),
           ]
         : []),
     ],
