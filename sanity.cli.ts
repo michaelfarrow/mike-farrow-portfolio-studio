@@ -1,5 +1,7 @@
-import { defineCliConfig } from 'sanity/cli';
 import tsconfigPaths from 'vite-tsconfig-paths';
+
+import { defineCliConfig } from 'sanity/cli';
+
 import { STUDIO_CONFIG } from '@/lib/env';
 
 export default defineCliConfig({

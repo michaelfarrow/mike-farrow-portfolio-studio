@@ -1,12 +1,11 @@
-import { defineConfig } from 'sanity';
-import { structureTool } from 'sanity/structure';
-import { presentationTool } from 'sanity/presentation';
 import { visionTool } from '@sanity/vision';
+import { defineConfig } from 'sanity';
+import { presentationTool } from 'sanity/presentation';
+import { structureTool } from 'sanity/structure';
 
-import { STUDIO_CONFIG, STUDIO_TITLE, APP_BASE_URL } from '@/lib/env';
-
-import { schemas } from '@/schemas';
+import { APP_BASE_URL, STUDIO_CONFIG, STUDIO_TITLE } from '@/lib/env';
 import { resolve } from '@/presentation/resolve';
+import { schemas } from '@/schemas';
 
 export default defineConfig({
   ...STUDIO_CONFIG,
