@@ -1,10 +1,12 @@
 import { defineField, defineType } from 'sanity';
 
 import { nameFields } from '@/schemas/common/fields/title';
+import { IconLink } from '@/schemas/common/icons';
 
 export const link = defineType({
   name: 'link',
   type: 'document',
+  icon: IconLink,
   fields: [
     ...nameFields({ slug: false }),
     defineField({
@@ -17,4 +19,10 @@ export const link = defineType({
       validation: (rule) => rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'url',
+    },
+  },
 });

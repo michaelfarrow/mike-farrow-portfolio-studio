@@ -3,7 +3,7 @@ import { titleCase } from 'title-case';
 import { defineArrayMember, defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
-import { ImageIcon, ImagesIcon } from '@/schemas/common/icons';
+import { IconImage, IconImages } from '@/schemas/common/icons';
 import { DocumentPreview } from '@/schemas/previews/document';
 
 interface ImageFieldOptions extends FieldOptions {
@@ -22,7 +22,7 @@ export function imageField(options: ImageFieldOptions) {
     fieldsets: [
       { name: 'additional', options: { collapsible: true, collapsed: true } },
     ],
-    icon: ImageIcon,
+    icon: IconImage,
     options: {
       hotspot: true,
       metadata: ['blurhash', 'lqip', 'palette', 'image', 'exif', 'location'],
@@ -58,9 +58,9 @@ export function imageField(options: ImageFieldOptions) {
         title: 'alt',
         subtitle: 'caption',
       },
-      prepare: (props) => ({
-        ...props,
-        media: props.media && { asset: props.media },
+      prepare: (selection) => ({
+        ...selection,
+        media: selection.media && { asset: selection.media },
       }),
     },
     components: {
@@ -82,7 +82,7 @@ export function responsiveImageField({
   return defineField({
     ...rest,
     type: 'object',
-    icon: ImagesIcon,
+    icon: IconImages,
     fields: [
       imageField({
         name: 'main',
@@ -118,15 +118,12 @@ export function responsiveImageField({
                 breakpoint: 'breakpoint',
                 media: 'image',
               },
-              prepare(selection) {
-                const { media, breakpoint } = selection;
-                return {
-                  media,
-                  title:
-                    (breakpoint && titleCase(breakpoint)) ||
-                    '[No breakpoint selected]',
-                };
-              },
+              prepare: ({ media, breakpoint }) => ({
+                media,
+                title:
+                  (breakpoint && titleCase(breakpoint)) ||
+                  '[No breakpoint selected]',
+              }),
             },
           }),
         ],

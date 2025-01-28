@@ -8,7 +8,7 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "lint": "eslint .",
+    "lint": "eslint; tsc --noEmit",
     "deploy-graphql": "sanity graphql deploy",
     "generate:schema": "sanity schema extract",
     "generate:types": "sanity typegen generate",

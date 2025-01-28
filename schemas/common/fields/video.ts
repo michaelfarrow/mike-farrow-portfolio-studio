@@ -4,7 +4,7 @@ import { defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
 import { imageField } from '@/schemas/common/fields/image';
-import { VideoIcon } from '@/schemas/common/icons';
+import { IconVideo } from '@/schemas/common/icons';
 import { DocumentPreview } from '@/schemas/previews/document';
 
 interface VideoFieldOptions extends FieldOptions {
@@ -17,7 +17,7 @@ export function videoField(options: VideoFieldOptions) {
   return defineField({
     ...rest,
     type: 'object',
-    icon: VideoIcon,
+    icon: IconVideo,
     fields: [
       defineField({
         name: 'url',

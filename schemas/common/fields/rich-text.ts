@@ -1,7 +1,7 @@
 import { defineArrayMember, defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
-import { DocumentTextIcon } from '@/schemas/common/icons';
+import { IconDocumentText } from '@/schemas/common/icons';
 import { RichTextPreview } from '@/schemas/previews/rich-text';
 
 export function richTextField(options: FieldOptions) {
@@ -10,7 +10,7 @@ export function richTextField(options: FieldOptions) {
   return defineField({
     ...rest,
     type: 'object',
-    icon: DocumentTextIcon,
+    icon: IconDocumentText,
     fields: [
       defineField({
         name: 'content',
@@ -26,7 +26,7 @@ export function richTextField(options: FieldOptions) {
       select: {
         content: 'content',
       },
-      prepare: (props) => ({ title: 'Rich Text', ...props }),
+      prepare: (selection) => ({ ...selection, title: 'Rich Text' }),
     },
     components: {
       preview: RichTextPreview,

@@ -3,10 +3,12 @@ import { defineArrayMember, defineField, defineType } from 'sanity';
 import { contentArrayField } from '@/schemas/common/fields/content-array';
 import { imageField } from '@/schemas/common/fields/image';
 import { nameFields } from '@/schemas/common/fields/title';
+import { IconProject } from '@/schemas/common/icons';
 
 export const project = defineType({
   name: 'project',
   type: 'document',
+  icon: IconProject,
   fieldsets: [
     {
       name: 'details',
@@ -64,6 +66,7 @@ export const project = defineType({
             defineField({
               name: 'name',
               type: 'string',
+              validation: (rule) => rule.required(),
             }),
             defineField({
               name: 'contacts',
@@ -77,6 +80,21 @@ export const project = defineType({
               validation: (rule) => rule.required(),
             }),
           ],
+          preview: {
+            select: {
+              title: 'name',
+              contacts: 'contacts',
+            },
+            prepare: (selection) => {
+              const { contacts } = selection;
+              const photoCount = Object.values(contacts || {}).length;
+              return {
+                ...selection,
+                subtitle: `${photoCount} contact${photoCount !== 1 ? 's' : ''}`,
+                icon: false,
+              };
+            },
+          },
         }),
       ],
     }),
@@ -93,4 +111,11 @@ export const project = defineType({
       initialValue: false,
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'client.name',
+      media: 'thumbnail.asset',
+    },
+  },
 });
