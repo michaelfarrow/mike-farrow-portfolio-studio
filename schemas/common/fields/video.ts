@@ -1,11 +1,11 @@
 import { defineField } from 'sanity';
-import { DocumentVideoIcon } from '@sanity/icons';
 import getYouTubeID from 'get-youtube-id';
-
-import { VideoPreview } from '@/schemas/preview/video';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
 import { imageField } from '@/schemas/common/fields/image';
+import { VideoIcon } from '@/schemas/common/icons';
+
+import { DocumentPreview } from '@/schemas/previews/document';
 
 interface VideoFieldOptions extends FieldOptions {
   caption?: boolean;
@@ -17,7 +17,7 @@ export function videoField(options: VideoFieldOptions) {
   return defineField({
     ...rest,
     type: 'object',
-    icon: DocumentVideoIcon,
+    icon: VideoIcon,
     fields: [
       defineField({
         name: 'url',
@@ -52,11 +52,13 @@ export function videoField(options: VideoFieldOptions) {
     ],
     preview: {
       select: {
-        url: 'url',
+        media: 'poster',
+        title: 'alt',
+        subtitle: 'caption',
       },
     },
     components: {
-      preview: VideoPreview,
+      preview: DocumentPreview,
     },
   });
 }

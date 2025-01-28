@@ -1,12 +1,13 @@
-import { defineField, defineArrayMember } from 'sanity';
-import { DocumentTextIcon } from '@sanity/icons';
+import { defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
+import { richTextField } from '@/schemas/common/fields/rich-text';
 import { videoField } from '@/schemas/common/fields/video';
 import {
   imageField,
   responsiveImageField,
 } from '@/schemas/common/fields/image';
+import { conditionalField, conditionalFields } from '../utils';
 
 // import {
 //   externalLinkAnnotation,
@@ -14,11 +15,13 @@ import {
 // } from '@/schemas/common/blocks/annotations/link';
 
 interface ContentArrayOptions extends FieldOptions {
+  text?: boolean;
   images?: boolean;
   videos?: boolean;
 }
 
 export function contentArrayField({
+  text,
   images,
   videos,
   ...rest
@@ -26,32 +29,17 @@ export function contentArrayField({
   return defineField({
     ...rest,
     type: 'array',
-    of: [
-      defineArrayMember({
-        type: 'object',
-        name: 'richText',
-        icon: DocumentTextIcon,
-        fields: [
-          defineField({
-            name: 'content',
-            type: 'array',
-            of: [
-              defineArrayMember({
-                type: 'block',
-              }),
-            ],
-          }),
-        ],
-      }),
-      ...(images !== false
-        ? [
-            imageField({ name: 'image', caption: true }),
-            responsiveImageField({ name: 'responsiveImage', caption: true }),
-          ]
-        : []),
-      ...(videos !== false
-        ? [videoField({ name: 'video', caption: true })]
-        : []),
-    ],
+    of: conditionalFields(
+      conditionalField(text, richTextField({ name: 'richText' })),
+      conditionalField(images, [
+        imageField({ name: 'image', required: true, caption: true }),
+        responsiveImageField({
+          name: 'responsiveImage',
+          required: true,
+          caption: true,
+        }),
+      ]),
+      conditionalField(videos, videoField({ name: 'video', caption: true }))
+    ),
   });
 }

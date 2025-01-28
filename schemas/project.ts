@@ -2,7 +2,6 @@ import { defineType, defineField, defineArrayMember } from 'sanity';
 
 import { nameFields } from '@/schemas/common/fields/title';
 import { imageField } from '@/schemas/common/fields/image';
-import { videoField } from '@/schemas/common/fields/video';
 import { contentArrayField } from '@/schemas/common/fields/content-array';
 
 export const project = defineType({

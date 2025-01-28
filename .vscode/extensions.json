@@ -2,6 +2,7 @@
   "recommendations": [
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "sanity-io.vscode-sanity"
+    "sanity-io.vscode-sanity",
+    "styled-components.vscode-styled-components"
   ]
 }

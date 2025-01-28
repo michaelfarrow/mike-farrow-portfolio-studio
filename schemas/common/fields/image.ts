@@ -1,8 +1,10 @@
 import { defineField, defineArrayMember } from 'sanity';
 import { titleCase } from 'title-case';
-import { ImageIcon, ImagesIcon } from '@sanity/icons';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
+import { ImageIcon, ImagesIcon } from '@/schemas/common/icons';
+
+import { DocumentPreview } from '@/schemas/previews/document';
 
 interface ImageFieldOptions extends FieldOptions {
   decorative?: boolean;
@@ -41,14 +43,30 @@ export function imageField(options: ImageFieldOptions) {
           : []),
       ]) ||
       [],
+    preview: {
+      select: {
+        media: 'asset',
+        title: 'alt',
+        subtitle: 'caption',
+      },
+      prepare: (props) => ({
+        ...props,
+        media: props.media && { asset: props.media },
+      }),
+    },
+    components: {
+      preview: DocumentPreview,
+    },
   });
 }
 
 interface ResponsiveImageFieldOptions extends FieldOptions {
   caption?: boolean;
+  required?: boolean;
 }
 
 export function responsiveImageField({
+  required,
   caption,
   ...rest
 }: ResponsiveImageFieldOptions) {
@@ -62,6 +80,7 @@ export function responsiveImageField({
         title: 'Main Image',
         description:
           'Used across all breakpoints, or highest breakpoints if any alternative images are set',
+        required,
         caption,
       }),
       defineField({
@@ -108,7 +127,11 @@ export function responsiveImageField({
       select: {
         media: 'main.asset',
         title: 'main.alt',
+        subtitle: 'main.caption',
       },
+    },
+    components: {
+      preview: DocumentPreview,
     },
   });
 }
