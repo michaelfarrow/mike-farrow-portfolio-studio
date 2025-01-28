@@ -8,6 +8,7 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
+    "lint": "eslint .",
     "deploy-graphql": "sanity graphql deploy",
     "generate:schema": "sanity schema extract",
     "generate:types": "sanity typegen generate",
@@ -19,6 +20,7 @@
   ],
   "dependencies": {
     "@portabletext/react": "^3.2.0",
+    "@sanity/google-maps-input": "^4.1.0",
     "@sanity/vision": "^3.69.0",
     "change-case": "^5.4.4",
     "get-youtube-id": "^1.0.1",

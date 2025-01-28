@@ -10,14 +10,18 @@ interface ImageFieldOptions extends FieldOptions {
   decorative?: boolean;
   required?: boolean;
   caption?: boolean;
+  fields?: ReturnType<typeof defineField>[];
 }
 
 export function imageField(options: ImageFieldOptions) {
-  const { decorative, required, caption, ...rest } = options;
+  const { decorative, required, caption, fields, ...rest } = options;
 
   return defineField({
     ...rest,
     type: 'image',
+    fieldsets: [
+      { name: 'additional', options: { collapsible: true, collapsed: true } },
+    ],
     icon: ImageIcon,
     options: {
       hotspot: true,
@@ -38,9 +42,14 @@ export function imageField(options: ImageFieldOptions) {
                 name: 'caption',
                 type: 'text',
                 rows: 4,
+                fieldset: 'additional',
               }),
             ]
           : []),
+        ...(fields || []).map((field) => ({
+          ...field,
+          fieldset: 'additional',
+        })),
       ]) ||
       [],
     preview: {
