@@ -11,7 +11,6 @@ const config = {
   insertPragma: false,
   singleAttributePerLine: false,
   bracketSameLine: false,
-  jsxBracketSameLine: false,
   jsxSingleQuote: true,
   printWidth: 80,
   proseWrap: 'preserve',
