@@ -1,5 +1,5 @@
-import { defineField } from 'sanity';
 import { LinkIcon } from '@sanity/icons';
+import { defineField } from 'sanity';
 
 export const externalLinkAnnotation = defineField({
   type: 'object',

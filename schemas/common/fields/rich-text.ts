@@ -1,8 +1,7 @@
-import { defineField, defineArrayMember } from 'sanity';
+import { defineArrayMember, defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
 import { DocumentTextIcon } from '@/schemas/common/icons';
-
 import { RichTextPreview } from '@/schemas/previews/rich-text';
 
 export function richTextField(options: FieldOptions) {

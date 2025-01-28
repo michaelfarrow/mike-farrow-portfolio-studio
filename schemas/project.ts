@@ -1,8 +1,8 @@
-import { defineType, defineField, defineArrayMember } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
-import { nameFields } from '@/schemas/common/fields/title';
-import { imageField } from '@/schemas/common/fields/image';
 import { contentArrayField } from '@/schemas/common/fields/content-array';
+import { imageField } from '@/schemas/common/fields/image';
+import { nameFields } from '@/schemas/common/fields/title';
 
 export const project = defineType({
   name: 'project',

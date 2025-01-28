@@ -1,4 +1,5 @@
 import { defineType } from 'sanity';
+
 import {
   imageField,
   responsiveImageField,

@@ -1,8 +1,9 @@
-import { type PreviewProps } from 'sanity';
-import { Flex, Text } from '@sanity/ui';
 import { PortableText, PortableTextBlock } from '@portabletext/react';
 import { isValidElementType } from 'react-is';
 import styled from 'styled-components';
+
+import { Flex, Text } from '@sanity/ui';
+import { type PreviewProps } from 'sanity';
 
 export interface RichTextPreviewProps extends PreviewProps {
   className?: string;

@@ -1,9 +1,9 @@
-import { defineField, defineArrayMember } from 'sanity';
 import { titleCase } from 'title-case';
+
+import { defineArrayMember, defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
 import { ImageIcon, ImagesIcon } from '@/schemas/common/icons';
-
 import { DocumentPreview } from '@/schemas/previews/document';
 
 interface ImageFieldOptions extends FieldOptions {

@@ -1,9 +1,9 @@
-import { PreviewProps } from 'sanity';
-import { Flex, Badge } from '@sanity/ui';
-import { DocumentIcon } from '@sanity/icons';
-
 import { capitalCase } from 'change-case';
 import { isValidElementType } from 'react-is';
+
+import { DocumentIcon } from '@sanity/icons';
+import { Badge, Flex } from '@sanity/ui';
+import { PreviewProps } from 'sanity';
 
 export const DocumentPreview = (props: PreviewProps) => {
   const { renderDefault, schemaType } = props;

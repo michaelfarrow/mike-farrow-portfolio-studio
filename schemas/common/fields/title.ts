@@ -1,5 +1,6 @@
-import { defineField } from 'sanity';
 import { SetOptional } from 'type-fest';
+
+import { defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
 

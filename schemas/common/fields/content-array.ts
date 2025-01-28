@@ -1,13 +1,13 @@
 import { defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
-import { richTextField } from '@/schemas/common/fields/rich-text';
-import { videoField } from '@/schemas/common/fields/video';
 import {
   imageField,
   responsiveImageField,
 } from '@/schemas/common/fields/image';
-import { conditionalField, conditionalFields } from '../utils';
+import { richTextField } from '@/schemas/common/fields/rich-text';
+import { videoField } from '@/schemas/common/fields/video';
+import { conditionalField, conditionalFields } from '@/schemas/common/utils';
 
 // import {
 //   externalLinkAnnotation,

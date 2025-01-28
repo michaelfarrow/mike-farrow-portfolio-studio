@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+
 import { nameFields } from '@/schemas/common/fields/title';
 
 export const link = defineType({

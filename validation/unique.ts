@@ -1,5 +1,7 @@
-import { CustomValidator } from 'sanity';
 import groq from 'groq';
+
+import { CustomValidator } from 'sanity';
+
 import { STUDIO_CONFIG } from '@/lib/env';
 
 export const unique: CustomValidator<any | undefined> = async (

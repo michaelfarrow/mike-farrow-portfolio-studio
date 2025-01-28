@@ -1,10 +1,10 @@
-import { defineField } from 'sanity';
 import getYouTubeID from 'get-youtube-id';
+
+import { defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
 import { imageField } from '@/schemas/common/fields/image';
 import { VideoIcon } from '@/schemas/common/icons';
-
 import { DocumentPreview } from '@/schemas/previews/document';
 
 interface VideoFieldOptions extends FieldOptions {
