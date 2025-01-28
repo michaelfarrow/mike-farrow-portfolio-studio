@@ -1,4 +1,4 @@
-export default {
+const config = {
   plugins: ['@trivago/prettier-plugin-sort-imports'],
   importOrder: ['<THIRD_PARTY_MODULES>', '^@?sanity(.*)$', '^@/(.*)$', '^[./]'],
   importOrderSeparation: true,
@@ -26,3 +26,5 @@ export default {
   vueIndentScriptAndStyle: false,
   experimentalTernaries: false,
 };
+
+export default config;
