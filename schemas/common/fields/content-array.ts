@@ -1,4 +1,4 @@
-import { defineField } from 'sanity';
+import { defineArrayMember, defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
 import {
@@ -29,17 +29,39 @@ export function contentArrayField({
   return defineField({
     ...rest,
     type: 'array',
-    of: conditionalFields(
-      conditionalField(text, richTextField({ name: 'richText' })),
-      conditionalField(images, [
-        imageField({ name: 'image', required: true, caption: true }),
-        responsiveImageField({
-          name: 'responsiveImage',
-          required: true,
-          caption: true,
-        }),
-      ]),
-      conditionalField(videos, videoField({ name: 'video', caption: true }))
-    ),
+    of: [
+      ...conditionalFields(
+        conditionalField(text, richTextField({ name: 'richText' })),
+        conditionalField(images, [
+          imageField({ name: 'image', required: true, caption: true }),
+          responsiveImageField({
+            name: 'responsiveImage',
+            required: true,
+            caption: true,
+          }),
+        ]),
+        conditionalField(videos, videoField({ name: 'video', caption: true }))
+      ),
+      defineArrayMember({
+        type: 'object',
+        name: 'temp',
+        fields: [
+          defineField({
+            type: 'array',
+            name: 'names',
+            validation: (rule) => rule.required(),
+            of: [
+              defineArrayMember(
+                defineField({
+                  type: 'string',
+                  name: 'name',
+                  validation: (rule) => rule.required(),
+                })
+              ),
+            ],
+          }),
+        ],
+      }),
+    ],
   });
 }
