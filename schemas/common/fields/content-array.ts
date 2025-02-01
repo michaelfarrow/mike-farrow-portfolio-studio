@@ -53,9 +53,15 @@ export function contentArrayField({
             of: [
               defineArrayMember(
                 defineField({
-                  type: 'string',
-                  name: 'name',
-                  validation: (rule) => rule.required(),
+                  type: 'object',
+                  name: 'person',
+                  fields: [
+                    defineField({
+                      type: 'string',
+                      name: 'name',
+                      validation: (rule) => rule.required(),
+                    }),
+                  ],
                 })
               ),
             ],
