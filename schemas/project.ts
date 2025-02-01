@@ -61,6 +61,7 @@ export const project = defineType({
       fieldset: 'links',
       of: [
         defineArrayMember({
+          name: 'attribution',
           type: 'object',
           fields: [
             defineField({
