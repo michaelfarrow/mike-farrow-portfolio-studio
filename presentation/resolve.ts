@@ -35,14 +35,14 @@ function createTypeResolver<
     select: Record<K, string>;
     locations: (
       value: Record<K, any> | null,
-      generateLink: (params?: Params | null) => string
+      href: (params?: Params | null) => string
     ) => {
       title: string;
       href: string;
     }[];
   }
 ) {
-  const generateLink: (params?: Params | null) => string = (params) => {
+  const href: (params?: Params | null) => string = (params) => {
     let p: string = path;
     for (const [key, val] of Object.entries(params || {})) {
       p = p.replaceAll(`[${key}]`, val);
@@ -53,13 +53,13 @@ function createTypeResolver<
   return {
     select,
     resolve: (doc: any) => ({
-      locations: locations(doc, generateLink),
+      locations: locations(doc, href),
     }),
     document: {
       route: path.replace(/\[(.*?)\]/g, ':$1'),
       filter,
     },
-    generateLink,
+    href,
   };
 }
 
@@ -74,11 +74,11 @@ function createSlugTypeResolver<T extends string, P extends string>(
       name: 'name',
       slug: 'slug.current',
     },
-    locations(doc, generateLink) {
+    locations(doc, href) {
       return [
         {
           title: doc?.name || 'Untitled',
-          href: generateLink(doc),
+          href: href(doc),
         },
         ...(index
           ? [
