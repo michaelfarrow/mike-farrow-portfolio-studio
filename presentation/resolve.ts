@@ -52,9 +52,7 @@ function createTypeResolver<
 
   return {
     select,
-    resolve: (doc: any) => ({
-      locations: locations(doc, href),
-    }),
+    locations,
     document: {
       route: path.replace(/\[(.*?)\]/g, ':$1'),
       filter,
@@ -80,7 +78,7 @@ function createSlugTypeResolver<T extends string, P extends string>(
           title: doc?.name || 'Untitled',
           href: href(doc),
         },
-        ...(index
+        ...(index !== undefined
           ? [
               {
                 title: `${titleCase(capitalCase(type))} index`,
@@ -95,5 +93,8 @@ function createSlugTypeResolver<T extends string, P extends string>(
 
 const project = createSlugTypeResolver('project', 'projects', '');
 const album = createSlugTypeResolver('album', 'albums', 'albums');
+
+console.log(project.locations({ slug: 'test', name: '' }, project.href));
+console.log(album.locations({ slug: 'test', name: '' }, album.href));
 
 export const resolve = { project, album };

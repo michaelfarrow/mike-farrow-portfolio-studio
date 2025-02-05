@@ -30,10 +30,12 @@ export default defineConfig({
     visionTool(),
     presentationTool({
       resolve: {
-        locations: mapValues(resolve, ({ select, resolve }) =>
+        locations: mapValues(resolve, ({ select, locations, href }) =>
           defineLocations({
             select,
-            resolve,
+            resolve: (doc: any) => ({
+              locations: locations(doc, href),
+            }),
           })
         ),
         mainDocuments: defineDocuments(
