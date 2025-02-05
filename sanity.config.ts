@@ -1,7 +1,13 @@
+import { mapValues } from 'lodash';
+
 import { googleMapsInput } from '@sanity/google-maps-input';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
-import { presentationTool } from 'sanity/presentation';
+import {
+  defineDocuments,
+  defineLocations,
+  presentationTool,
+} from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
 
 import {
@@ -23,8 +29,19 @@ export default defineConfig({
     structureTool(),
     visionTool(),
     presentationTool({
-      resolve,
+      resolve: {
+        locations: mapValues(resolve, ({ select, resolve }) =>
+          defineLocations({
+            select,
+            resolve,
+          })
+        ),
+        mainDocuments: defineDocuments(
+          Object.values(resolve).map((test) => test.document)
+        ),
+      },
       previewUrl: {
+        origin: APP_BASE_URL,
         previewMode: {
           enable: `${APP_BASE_URL}/api/draft-mode/enable`,
         },
