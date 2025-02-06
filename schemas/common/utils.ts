@@ -1,10 +1,10 @@
-import type { defineField } from 'sanity';
+import type { defineArrayMember, defineField } from 'sanity';
 
-export function conditionalField(
-  condition: boolean | undefined,
-  field: ReturnType<typeof defineField> | ReturnType<typeof defineField>[]
-) {
-  return condition !== false ? field : undefined;
+export function conditionalField<
+  T extends ReturnType<typeof defineField | typeof defineArrayMember>,
+  F extends () => T | T[],
+>(condition: boolean | undefined, field: F) {
+  return condition !== false ? field() : undefined;
 }
 
 export function conditionalFields(

@@ -18,21 +18,23 @@ interface ContentArrayOptions extends FieldOptions {
   text?: boolean;
   images?: boolean;
   videos?: boolean;
+  columns?: boolean;
 }
 
 export function contentArrayField({
   text,
   images,
   videos,
+  columns,
   ...rest
-}: ContentArrayOptions) {
+}: ContentArrayOptions): any {
   return defineField({
     ...rest,
     type: 'array',
     of: [
       ...conditionalFields(
-        conditionalField(text, richTextField({ name: 'richText' })),
-        conditionalField(images, [
+        conditionalField(text, () => richTextField({ name: 'richText' })),
+        conditionalField(images, () => [
           imageField({ name: 'image', required: true, caption: true }),
           responsiveImageField({
             name: 'responsiveImage',
@@ -40,7 +42,36 @@ export function contentArrayField({
             caption: true,
           }),
         ]),
-        conditionalField(videos, videoField({ name: 'video', caption: true }))
+        conditionalField(videos, () =>
+          videoField({ name: 'video', caption: true })
+        ),
+        conditionalField(columns, () =>
+          defineArrayMember({
+            type: 'object',
+            name: 'columns',
+            fields: [
+              defineField({
+                name: 'columns',
+                type: 'array',
+                of: [
+                  defineField({
+                    name: 'column',
+                    type: 'object',
+                    fields: [
+                      contentArrayField({
+                        name: 'content',
+                        text,
+                        images,
+                        videos,
+                        columns: false,
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          })
+        )
       ),
       defineArrayMember({
         type: 'object',
