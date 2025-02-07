@@ -102,3 +102,114 @@ export function contentArrayField({
     ],
   });
 }
+
+export function contentArrayFieldFlat({
+  text,
+  images,
+  videos,
+  columns,
+  ...rest
+}: ContentArrayOptions): any {
+  return defineField({
+    ...rest,
+    type: 'array',
+    of: [
+      defineArrayMember({
+        type: 'object',
+        name: 'item',
+        fields: [
+          defineField({
+            name: 'span',
+            type: 'number',
+
+            initialValue: 1,
+            validation: (rule) => rule.required().integer().min(1).max(2),
+            options: {
+              layout: 'radio',
+              list: [
+                { value: 1, title: 'One' },
+                { value: 2, title: 'Two' },
+              ],
+              direction: 'horizontal',
+            },
+          }),
+          defineField({
+            name: 'content',
+            type: 'array',
+            of: [
+              ...conditionalFields(
+                conditionalField(text, () =>
+                  richTextField({ name: 'richText' })
+                ),
+                conditionalField(images, () => [
+                  imageField({ name: 'image', required: true, caption: true }),
+                  responsiveImageField({
+                    name: 'responsiveImage',
+                    required: true,
+                    caption: true,
+                  }),
+                ]),
+                conditionalField(videos, () =>
+                  videoField({ name: 'video', caption: true })
+                ),
+                conditionalField(columns, () =>
+                  defineArrayMember({
+                    type: 'object',
+                    name: 'columns',
+                    fields: [
+                      defineField({
+                        name: 'columns',
+                        type: 'array',
+                        of: [
+                          defineField({
+                            name: 'column',
+                            type: 'object',
+                            fields: [
+                              contentArrayField({
+                                name: 'content',
+                                text,
+                                images,
+                                videos,
+                                columns: false,
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                    ],
+                  })
+                )
+              ),
+              defineArrayMember({
+                type: 'object',
+                name: 'temp',
+                fields: [
+                  defineField({
+                    type: 'array',
+                    name: 'names',
+                    validation: (rule) => rule.required(),
+                    of: [
+                      defineArrayMember(
+                        defineField({
+                          type: 'object',
+                          name: 'person',
+                          fields: [
+                            defineField({
+                              type: 'string',
+                              name: 'name',
+                              validation: (rule) => rule.required(),
+                            }),
+                          ],
+                        })
+                      ),
+                    ],
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+}
