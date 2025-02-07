@@ -1,4 +1,4 @@
-import { defineArrayMember, defineField } from 'sanity';
+import { PreviewConfig, defineArrayMember, defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
 import {
@@ -8,6 +8,7 @@ import {
 import { richTextField } from '@/schemas/common/fields/rich-text';
 import { videoField } from '@/schemas/common/fields/video';
 import { conditionalField, conditionalFields } from '@/schemas/common/utils';
+import { ContentRowPreview } from '@/schemas/previews/content-row';
 
 // import {
 //   externalLinkAnnotation,
@@ -209,6 +210,20 @@ export function contentArrayFieldFlat({
             ],
           }),
         ],
+        preview: {
+          select: {
+            span: 'span',
+            content: 'content',
+          },
+          prepare: (selection) => ({
+            ...selection,
+            title: '',
+            icon: false,
+          }),
+        },
+        components: {
+          preview: ContentRowPreview,
+        },
       }),
     ],
   });

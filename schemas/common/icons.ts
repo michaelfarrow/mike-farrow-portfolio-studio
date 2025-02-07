@@ -13,3 +13,6 @@ export { PiImageSquareBold as IconImage } from 'react-icons/pi';
 export { PiImagesSquareBold as IconImages } from 'react-icons/pi';
 export { PiYoutubeLogoBold as IconVideo } from 'react-icons/pi';
 export { PiFileTextBold as IconDocumentText } from 'react-icons/pi';
+
+export { PiRowsBold as IconRows } from 'react-icons/pi';
+export { PiColumnsBold as IconColumns } from 'react-icons/pi';

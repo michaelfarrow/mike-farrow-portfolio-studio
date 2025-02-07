@@ -6,13 +6,12 @@ import { Flex, Text } from '@sanity/ui';
 import { type PreviewProps } from 'sanity';
 
 export interface RichTextPreviewProps extends PreviewProps {
-  className?: string;
   content?: PortableTextBlock[];
 }
 
-const Preview = ({ className, content }: RichTextPreviewProps) => {
+const Preview = ({ content }: RichTextPreviewProps) => {
   return (
-    <div className={className}>
+    <div>
       <Flex padding={2}>
         <div className='container'>
           <div className='content'>
