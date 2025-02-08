@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
-import { contentArrayFieldFlat } from '@/schemas/common/fields/content-array';
+import { contentArrayField } from '@/schemas/common/fields/content-array';
 import { imageField } from '@/schemas/common/fields/image';
 import { markdownField } from '@/schemas/common/fields/markdown';
 import { nameFields } from '@/schemas/common/fields/title';
@@ -52,8 +52,7 @@ export const project = defineType({
     markdownField({
       name: 'descriptionLong',
     }),
-    // contentArrayField({ name: 'content' }),
-    contentArrayFieldFlat({ name: 'contentFlat' }),
+    contentArrayField({ name: 'content' }),
     defineField({
       name: 'client',
       type: 'reference',
