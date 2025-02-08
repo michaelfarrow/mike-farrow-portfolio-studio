@@ -670,16 +670,7 @@
       "descriptionLong": {
         "type": "objectAttribute",
         "value": {
-          "type": "object",
-          "attributes": {
-            "content": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            }
-          }
+          "type": "string"
         },
         "optional": true
       },

@@ -1,3 +1,11 @@
 button.heading-4:after {
   content: '4';
 }
+
+.EasyMDEContainer .CodeMirror.CodeMirror.CodeMirror-focused {
+  border-color: var(--card-focus-ring-color);
+}
+
+.EasyMDEContainer .CodeMirror-focused .CodeMirror-selectedtext {
+  background-color: rgba(85, 107, 252, 0.3);
+}

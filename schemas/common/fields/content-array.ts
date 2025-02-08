@@ -5,7 +5,7 @@ import {
   imageField,
   responsiveImageField,
 } from '@/schemas/common/fields/image';
-import { markdownField } from '@/schemas/common/fields/markdown';
+import { markdownObjectField } from '@/schemas/common/fields/markdown-object';
 import { richTextField } from '@/schemas/common/fields/rich-text';
 import { videoField } from '@/schemas/common/fields/video';
 import { conditionalField, conditionalFields } from '@/schemas/common/utils';
@@ -147,7 +147,7 @@ export function contentArrayFieldFlat({
                   richTextField({ name: 'richText' })
                 ),
                 conditionalField(text, () =>
-                  markdownField({ name: 'markdown' })
+                  markdownObjectField({ name: 'markdown' })
                 ),
                 conditionalField(images, () => [
                   imageField({ name: 'image', required: true, caption: true }),
