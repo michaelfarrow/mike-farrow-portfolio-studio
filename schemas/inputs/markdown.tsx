@@ -45,9 +45,9 @@ export function MarkdownInput(props: MarkdownInputProps) {
           '|',
           'link',
           'code',
-          '|',
-          'preview',
-          'side-by-side',
+          // '|',
+          // 'preview',
+          // 'side-by-side',
         ],
         uploadImage: false,
         // more options available, see:
