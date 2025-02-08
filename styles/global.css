@@ -6,6 +6,10 @@ button.heading-4:after {
   border-color: var(--card-focus-ring-color);
 }
 
+.EasyMDEContainer .CodeMirror-focused .CodeMirror-selected {
+  background-color: transparent !important;
+}
+
 .EasyMDEContainer .CodeMirror-focused .CodeMirror-selectedtext {
-  background-color: rgba(85, 107, 252, 0.3);
+  background-color: rgba(85, 107, 252, 0.3) !important;
 }
