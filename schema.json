@@ -928,7 +928,7 @@
                             "type": "objectAttribute",
                             "value": {
                               "type": "string",
-                              "value": "markdown"
+                              "value": "md"
                             }
                           }
                         },

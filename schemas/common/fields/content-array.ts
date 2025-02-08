@@ -147,7 +147,7 @@ export function contentArrayFieldFlat({
                   richTextField({ name: 'richText' })
                 ),
                 conditionalField(text, () =>
-                  markdownObjectField({ name: 'markdown' })
+                  markdownObjectField({ name: 'md', title: 'Markdown' })
                 ),
                 conditionalField(images, () => [
                   imageField({ name: 'image', required: true, caption: true }),
