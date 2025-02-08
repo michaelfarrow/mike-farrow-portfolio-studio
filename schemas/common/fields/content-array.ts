@@ -1,10 +1,11 @@
-import { PreviewConfig, defineArrayMember, defineField } from 'sanity';
+import { defineArrayMember, defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
 import {
   imageField,
   responsiveImageField,
 } from '@/schemas/common/fields/image';
+import { markdownField } from '@/schemas/common/fields/markdown';
 import { richTextField } from '@/schemas/common/fields/rich-text';
 import { videoField } from '@/schemas/common/fields/video';
 import { conditionalField, conditionalFields } from '@/schemas/common/utils';
@@ -120,9 +121,12 @@ export function contentArrayFieldFlat({
         name: 'item',
         fields: [
           defineField({
+            name: 'name',
+            type: 'string',
+          }),
+          defineField({
             name: 'span',
             type: 'number',
-
             initialValue: 1,
             validation: (rule) => rule.required().integer().min(1).max(2),
             options: {
@@ -141,6 +145,9 @@ export function contentArrayFieldFlat({
               ...conditionalFields(
                 conditionalField(text, () =>
                   richTextField({ name: 'richText' })
+                ),
+                conditionalField(text, () =>
+                  markdownField({ name: 'markdown' })
                 ),
                 conditionalField(images, () => [
                   imageField({ name: 'image', required: true, caption: true }),
@@ -212,14 +219,10 @@ export function contentArrayFieldFlat({
         ],
         preview: {
           select: {
+            title: 'name',
             span: 'span',
             content: 'content',
           },
-          prepare: (selection) => ({
-            ...selection,
-            title: '',
-            icon: false,
-          }),
         },
         components: {
           preview: ContentRowPreview,

@@ -3,6 +3,7 @@ import { mapValues } from 'lodash';
 import { googleMapsInput } from '@sanity/google-maps-input';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
+import { markdownSchema } from 'sanity-plugin-markdown';
 import {
   defineDocuments,
   defineLocations,
@@ -58,6 +59,7 @@ export default defineConfig({
       },
       defaultZoom: 6,
     }),
+    markdownSchema(),
   ],
 
   schema: {

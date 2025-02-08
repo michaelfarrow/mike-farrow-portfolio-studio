@@ -51,7 +51,7 @@ export const project = defineType({
       fieldset: 'content',
       rows: 5,
     }),
-    contentArrayField({ name: 'content' }),
+    // contentArrayField({ name: 'content' }),
     contentArrayFieldFlat({ name: 'contentFlat' }),
     defineField({
       name: 'client',

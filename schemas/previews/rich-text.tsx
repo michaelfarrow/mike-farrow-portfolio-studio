@@ -6,12 +6,13 @@ import { Flex, Text } from '@sanity/ui';
 import { type PreviewProps } from 'sanity';
 
 export interface RichTextPreviewProps extends PreviewProps {
+  className?: string;
   content?: PortableTextBlock[];
 }
 
-const Preview = ({ content }: RichTextPreviewProps) => {
+const Preview = ({ className, content }: RichTextPreviewProps) => {
   return (
-    <div>
+    <div className={className}>
       <Flex padding={2}>
         <div className='container'>
           <div className='content'>
@@ -79,6 +80,16 @@ export const RichTextPreview = styled(Preview)`
     padding-left: 1em;
     margin-left: 0.5em;
     border-left: 2px solid var(--card-hairline-soft-color);
+  }
+
+  .content > h1,
+  .content > h2,
+  .content > h3,
+  .content > h4,
+  .content > h5,
+  .content > h6 {
+    margin-top: 1em;
+    margin-bottom: 1em;
   }
 
   .content > h1 {
