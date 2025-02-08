@@ -2,6 +2,7 @@ import { defineField } from 'sanity';
 
 import { FieldOptions } from '@/schemas/common/fields/field';
 import { IconDocumentText } from '@/schemas/common/icons';
+import { MarkdownInput } from '@/schemas/inputs/markdown';
 import { MarkdownPreview } from '@/schemas/previews/markdown';
 
 export function markdownField(options: FieldOptions) {
@@ -15,6 +16,9 @@ export function markdownField(options: FieldOptions) {
       defineField({
         name: 'content',
         type: 'markdown',
+        components: {
+          input: MarkdownInput,
+        },
       }),
     ],
     preview: {

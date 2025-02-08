@@ -667,6 +667,22 @@
         },
         "optional": true
       },
+      "descriptionLong": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "content": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
       "contentFlat": {
         "type": "objectAttribute",
         "value": {

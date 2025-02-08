@@ -35,8 +35,8 @@ export const MarkdownPreview = styled(Preview)`
 
   .content > span > p,
   .content > span > blockquote {
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
   }
 
   .content > span > blockquote {

@@ -19,6 +19,7 @@ import {
 } from '@/lib/env';
 import { resolve } from '@/presentation/resolve';
 import { schemas } from '@/schemas';
+import '@/styles/global.css';
 
 export default defineConfig({
   ...STUDIO_CONFIG,
