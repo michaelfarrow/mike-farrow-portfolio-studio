@@ -694,12 +694,12 @@
                   "type": "union",
                   "of": [
                     {
-                      "type": "number",
-                      "value": 1
+                      "type": "string",
+                      "value": "half"
                     },
                     {
-                      "type": "number",
-                      "value": 2
+                      "type": "string",
+                      "value": "full"
                     }
                   ]
                 },

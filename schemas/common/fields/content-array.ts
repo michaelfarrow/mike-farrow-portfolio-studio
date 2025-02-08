@@ -43,14 +43,14 @@ export function contentArrayField({
           }),
           defineField({
             name: 'span',
-            type: 'number',
-            initialValue: 2,
-            validation: (rule) => rule.required().integer().min(1).max(2),
+            type: 'string',
+            initialValue: 'full',
+            validation: (rule) => rule.required(),
             options: {
               layout: 'radio',
               list: [
-                { value: 1, title: 'One' },
-                { value: 2, title: 'Two' },
+                { value: 'half', title: 'Half width' },
+                { value: 'full', title: 'Full width' },
               ],
               direction: 'horizontal',
             },
