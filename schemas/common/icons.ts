@@ -1,4 +1,4 @@
-export { PiQuestionBold as IconUnknown } from 'react-icons/pi';
+export { PiQuestionMarkBold as IconUnknown } from 'react-icons/pi';
 
 export { PiUserCircleBold as IconContact } from 'react-icons/pi';
 export { PiUserCircleBold as IconIndividual } from 'react-icons/pi';
@@ -13,6 +13,9 @@ export { PiImageSquareBold as IconImage } from 'react-icons/pi';
 export { PiImagesSquareBold as IconImages } from 'react-icons/pi';
 export { PiYoutubeLogoBold as IconVideo } from 'react-icons/pi';
 export { PiFileTextBold as IconDocumentText } from 'react-icons/pi';
+
+export { PiCodeBold as IconCode } from 'react-icons/pi';
+export { PiPaintBrush as IconDesign } from 'react-icons/pi';
 
 export { PiRowsBold as IconRows } from 'react-icons/pi';
 export { PiColumnsBold as IconColumns } from 'react-icons/pi';

@@ -1,10 +1,17 @@
+import { camelCase } from 'change-case';
+
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
 import { contentArrayField } from '@/schemas/common/fields/content-array';
 import { imageField } from '@/schemas/common/fields/image';
 import { markdownField } from '@/schemas/common/fields/markdown';
 import { nameFields } from '@/schemas/common/fields/title';
-import { IconProject } from '@/schemas/common/icons';
+import {
+  IconCode,
+  IconDesign,
+  IconProject,
+  IconUnknown,
+} from '@/schemas/common/icons';
 
 export const project = defineType({
   name: 'project',
@@ -96,7 +103,11 @@ export const project = defineType({
               return {
                 ...selection,
                 subtitle: `${photoCount} contact${photoCount !== 1 ? 's' : ''}`,
-                icon: false,
+                icon:
+                  {
+                    code: IconCode,
+                    design: IconDesign,
+                  }[camelCase(selection?.title?.trim())] || IconUnknown,
               };
             },
           },
