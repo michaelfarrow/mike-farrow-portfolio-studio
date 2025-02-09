@@ -73,20 +73,23 @@ function createSlugTypeResolver<T extends string, P extends string>(
       slug: 'slug.current',
     },
     locations(doc, href) {
-      return [
-        {
-          title: doc?.name || 'Untitled',
-          href: href(doc),
-        },
-        ...(index !== undefined
-          ? [
-              {
-                title: `${titleCase(capitalCase(type))} index`,
-                href: `/${index}`,
-              },
-            ]
-          : []),
-      ];
+      return (
+        (doc?.slug && [
+          {
+            title: doc?.name || 'Untitled',
+            href: href(doc),
+          },
+          ...(index !== undefined
+            ? [
+                {
+                  title: `${titleCase(capitalCase(type))} index`,
+                  href: `/${index}`,
+                },
+              ]
+            : []),
+        ]) ||
+        []
+      );
     },
   });
 }
