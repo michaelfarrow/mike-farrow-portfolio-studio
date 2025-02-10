@@ -1,14 +1,8 @@
-import { mapValues } from 'lodash';
-
 import { googleMapsInput } from '@sanity/google-maps-input';
 import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { markdownSchema } from 'sanity-plugin-markdown';
-import {
-  defineDocuments,
-  defineLocations,
-  presentationTool,
-} from 'sanity/presentation';
+import { defineDocuments, presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
 
 import {
@@ -18,6 +12,7 @@ import {
   STUDIO_TITLE,
 } from '@/lib/env';
 import { resolve } from '@/presentation/resolve';
+import { resolveDynamic } from '@/presentation/resolve-dynamic';
 import { schemas } from '@/schemas';
 import '@/styles/global.css';
 
@@ -32,14 +27,7 @@ export default defineConfig({
     visionTool(),
     presentationTool({
       resolve: {
-        locations: mapValues(resolve, ({ select, locations, href }) =>
-          defineLocations({
-            select,
-            resolve: (doc: any) => ({
-              locations: locations(doc, href),
-            }),
-          })
-        ),
+        locations: resolveDynamic,
         mainDocuments: defineDocuments(
           Object.values(resolve).map((test) => test.document)
         ),
