@@ -27,7 +27,7 @@ export default defineConfig({
     visionTool(),
     presentationTool({
       resolve: {
-        locations: resolveDynamic,
+        locations: resolveDynamic(resolve, { link: { deep: true } }),
         mainDocuments: defineDocuments(
           Object.values(resolve).map((test) => test.document)
         ),

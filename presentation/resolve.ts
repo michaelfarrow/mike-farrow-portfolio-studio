@@ -86,3 +86,5 @@ const project = createSlugTypeResolver('project', 'projects', '');
 const album = createSlugTypeResolver('album', 'albums', 'albums');
 
 export const resolve = { project, album };
+
+export type TypeResolver = ReturnType<typeof createTypeResolver>;
