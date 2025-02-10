@@ -13,7 +13,7 @@ export const resolveDynamic: DocumentLocationResolver = (params, context) => {
 
   const query = {
     fetch: `{
-      'document': ${resolver ? '*[_id==$id][0]{...}' : 'null'},
+      'document': *[_id==$id][0]{...},
       'references': *[
         references($id)
         && !(_id in path("drafts.**"))
@@ -33,10 +33,9 @@ export const resolveDynamic: DocumentLocationResolver = (params, context) => {
 
   return doc$.pipe(
     map((res) => {
-      if (!res.document && !res.references.length) return null;
-
       const mainLocations =
-        (res.document?.slug?.current && resolver.locations(res.document)) || [];
+        (res.document?.slug?.current && resolver?.locations(res.document)) ||
+        [];
 
       const references = res.references
         .map((doc: any) => {
