@@ -14,7 +14,7 @@
     "deploy-graphql": "sanity graphql deploy",
     "generate:schema": "sanity schema extract",
     "generate:types": "sanity typegen generate",
-    "watch": "chokidar ./schemas --silent --initial -c 'npm run generate:schema'",
+    "watch": "chokidar schema.json lib/queries --silent --initial -c 'npm run generate:types'",
     "prettier": "prettier './**/*.{js,ts,tsx,mjs,cjs,json,yml}' --write"
   },
   "keywords": [

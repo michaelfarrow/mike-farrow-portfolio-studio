@@ -1,0 +1,7 @@
+{
+  "path": "lib/queries/**/*.{ts,tsx,js,jsx}",
+  "schema": "schema.json",
+  "generates": "types/sanity.ts",
+  "overloadClientMethods": true,
+  "formatGeneratedCode": false
+}
