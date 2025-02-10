@@ -11,37 +11,16 @@ export const resolveDynamic: DocumentLocationResolver = (params, context) => {
   const resolver: (typeof resolve)[keyof typeof resolve] | undefined =
     resolve[type as keyof typeof resolve];
 
-  if (resolver) {
-    const query = {
-      fetch: `*[_id==$id][0]{...}`,
-      listen: `*[_id in [$id,$draftId]]`,
-    };
-
-    const doc$ = context.documentStore.listenQuery(
-      query,
-      { id, draftId: getDraftId(id) },
-      { perspective: 'previewDrafts' }
-    );
-
-    return doc$.pipe(
-      map((doc) => {
-        if (!doc || !doc.slug?.current) {
-          return null;
-        }
-        return {
-          locations: resolver.locations(doc),
-        };
-      })
-    );
-  }
-
   const query = {
-    fetch: `*[
-      references($id)
-      && !(_id in path("drafts.**"))
-      && length(string::split(_type, ".")) == 1
-    ] {
-      ...
+    fetch: `{
+      'document': ${resolver ? '*[_id==$id][0]{...}' : 'null'},
+      'references': *[
+        references($id)
+        && !(_id in path("drafts.**"))
+        && length(string::split(_type, ".")) == 1
+      ] {
+        ...
+      },
     }`,
     listen: `*[_id in [$id,$draftId]]`,
   };
@@ -53,10 +32,13 @@ export const resolveDynamic: DocumentLocationResolver = (params, context) => {
   );
 
   return doc$.pipe(
-    map((docs) => {
-      if (!docs.length) return null;
+    map((res) => {
+      if (!res.document && !res.references.length) return null;
 
-      const locations = docs
+      const mainLocations =
+        (res.document?.slug?.current && resolver.locations(res.document)) || [];
+
+      const references = res.references
         .map((doc: any) => {
           const resolver: (typeof resolve)[keyof typeof resolve] | undefined =
             resolve[doc._type as keyof typeof resolve];
@@ -66,6 +48,8 @@ export const resolveDynamic: DocumentLocationResolver = (params, context) => {
           return resolver.locations(doc)?.[0];
         })
         .filter(Boolean);
+
+      const locations = [...mainLocations, ...references];
 
       if (!locations.length) return null;
 

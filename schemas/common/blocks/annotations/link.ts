@@ -4,7 +4,6 @@ import { defineField } from 'sanity';
 export const externalLinkAnnotation = defineField({
   type: 'object',
   name: 'link',
-  title: 'Link',
   icon: LinkIcon,
   options: {
     modal: { type: 'popover' },
@@ -36,7 +35,6 @@ export const internalLinkAnnotation = defineField({
     {
       name: 'reference',
       type: 'reference',
-      title: 'Reference',
       to: [{ type: 'project' }],
     },
   ],
