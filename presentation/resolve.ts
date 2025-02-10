@@ -58,7 +58,6 @@ function createSlugTypeResolver<T extends string, P extends string>(
   return createTypeResolver(`/${path as string}/[slug]`, {
     filter: `_type == "${type}" && slug.current == $slug`,
     select: {
-      name: 'name',
       slug: 'slug.current',
     },
     locations(doc, href) {
