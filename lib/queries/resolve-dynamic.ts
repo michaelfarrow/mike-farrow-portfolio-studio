@@ -1,6 +1,7 @@
 import { defineQuery } from 'groq';
 
 const commonDocument = `
+  _id,
   _type,
   slug,
   name,
@@ -12,30 +13,16 @@ export const resolveDynamicQuery = defineQuery(`
     'document': *[_id==$id][0]{
       ${commonDocument}
     },
-    'references': *[
-      references($id)
-      && !(_id in path("drafts.**"))
-      && length(string::split(_type, ".")) == 1
-    ] {
-      ${commonDocument}
+    'directRefs': *[references($id)] {
+      ${commonDocument},
     },
-  }
-`);
-
-export const resolveDynamicQueryDeep = defineQuery(`
-  {
-    'document': *[_id==$id][0]{
-      ${commonDocument}
-    },
-    'references': *[
+    'indirectRefs': *[
+      $deep &&
       references(
-        $id,
         *[references($id)]._id
       )
-      && !(_id in path("drafts.**"))
-      && length(string::split(_type, ".")) == 1
     ] {
-      ${commonDocument}
+      ${commonDocument},
     },
   }
 `);
