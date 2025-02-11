@@ -11,10 +11,14 @@ import {
   STUDIO_GOOGLE_MAPS_KEY,
   STUDIO_TITLE,
 } from '@/lib/env';
-import { resolve } from '@/presentation/resolve';
 import { resolveDynamic } from '@/presentation/resolve-dynamic';
+import { resolve } from '@/presentation/resolve-studio';
 import { schemas } from '@/schemas';
 import '@/styles/global.css';
+
+console.log(
+  defineDocuments(Object.values(resolve).map((item) => item.document))
+);
 
 export default defineConfig({
   ...STUDIO_CONFIG,
@@ -29,7 +33,7 @@ export default defineConfig({
       resolve: {
         locations: resolveDynamic(resolve, { link: { deep: true } }),
         mainDocuments: defineDocuments(
-          Object.values(resolve).map((test) => test.document)
+          Object.values(resolve).map((item) => item.document)
         ),
       },
       previewUrl: {

@@ -6,7 +6,7 @@ import { getDraftId } from 'sanity';
 import { DocumentLocationResolver } from 'sanity/presentation';
 
 import { resolveDynamicQuery } from '@/lib/queries/resolve-dynamic';
-import { TypeResolver } from '@/presentation/resolve';
+import { TypeResolver } from '@/presentation/resolve-studio';
 import { SchemaType } from '@/schemas';
 
 export function resolveDynamic(
